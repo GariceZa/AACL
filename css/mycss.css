@@ -1,0 +1,189 @@
+h1
+{
+	color: #000000;
+	font-family: century;
+}
+h2 
+{
+	color: #ffffff;
+	background-color: #4A312A;
+	font-family: century;
+	text-align: center;
+	vertical-align: center;
+	border-radius: 7pc !important;
+}
+h3 
+{
+	color: #ffffff;	
+	text-align: center;
+	font-family: arial;
+	border-radius: 7pc !important;
+}
+h5	
+{
+	color: #ffffff;
+	text-align: right;
+	font-family: century;
+	font-size: 16px;
+	border-radius: 7pc !important;
+}
+body
+{
+	color: ##ffffff;
+	margin-left: 25px;
+	margin-right: 25px;
+	background-image: url('../images/woolcat.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+a
+{
+	color:#FEEECD;
+}
+p
+{
+	color:#ffffff;
+}
+.upload
+{
+	font-size: 18pt;
+}
+td
+{
+	color: #000000;
+	background-color: #8A9990;
+	border-radius: 3pc !important;
+}
+.jumbotron
+{
+	background-color: #8A9990;
+	color:#ffffff;
+	text-align: center; 
+	padding-top: 20px;
+	border-radius: 7pc !important;
+}
+.nav-tabs
+{
+	margin-bottom: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+	color: #000000;
+	background-color: #8A9990;
+	border-radius: 7pc !important;
+}
+.nav-tabs li.active a
+{
+	background-color: #3F5642;
+	color: #ffffff;
+}
+.nav-tabs >li:hover a
+{
+	background-color:#6E6A61;
+	color: #000000;
+}
+.nav-tabs >li.active a:hover
+{
+	background-color: #8A9990;
+	color:#000000;
+}
+#mycarousel .item img 
+{
+	width: 100%;
+	height: 300px !important;
+}
+.picture
+{
+	width: 85%;
+}
+.pic
+{
+	height: 170px;	
+	padding-bottom: 20px;
+}
+.media-object
+{
+	width:90%;		
+	margin-top: 22px;
+}
+.img-thumbnail
+{
+	height: 128px;
+	width: 128px;
+}
+.border 
+{
+	border: 2px solid black;
+	border-radius: 2pc;
+}
+.btn-default
+{
+	color: #000000;
+	background-color: #5AA03E;
+}
+/* unused */
+.btn-hover
+{
+	color: #ffffff;
+	background-color: #2E541F;
+}
+.btn 
+{
+	width: 100px;	
+}
+.links 
+{
+	font-family: tahoma;
+	font-size: 14px;
+	color: white;
+}
+.
+.footer
+{
+	font-family: verdanna;
+	font-size: 16px;
+}
+
+.size
+{
+	width:90%;
+	vertical-align: right;
+	/*width:80px;*/
+}
+.margin
+{
+	margin-bottom:25px;
+}
+.report
+{
+	background-color: #A0C55F;
+	color: #000000;
+	text-align: center;
+	border-radius: 2pc !important;
+}
+.stats
+{
+	color:#000000;
+	text-align: center;
+	background-color: #C4ED68;
+	border-radius: 2pc !important;
+}
+.labels
+{
+	color: #000000;
+	background-color: #8A9990;
+	text-align: center;
+	border-radius: 2pc !important;
+	font-size: 20sp;	
+}
+.post-box 
+{
+    margin: 5px 0 5px 0;    
+}
+.colour
+{
+	background-color: #4A312A;
+}
+.modal
+{
+	
+}
