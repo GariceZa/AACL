@@ -1,6 +1,7 @@
 <!DOCTYPE public>
 <html>
 <head>
+        <!--Test-->
 	<!--Web browser tab title-->
 	<title>About Animals</title>
 	<!--Getting web styling from css file -->
