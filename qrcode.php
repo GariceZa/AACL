@@ -87,14 +87,13 @@ else{
 			<div class="row">
 				<div class="col-md-12"> 
 					<ul class="nav nav-tabs" data-tabs="tabs" >
-			  			<li><a href="home.html">Home</a></li>		  			
+			  			<li><a href="home.php">Home</a></li>		  			
 			  			<li><a href="animals.php">Animals</a></li>
 			  			<li class="active" data-toggle="tab"><a href="qrcode.php">QR Codes</a></li>
 			  			<li><a href="users.php">Users</a></li>
 			  			<li><a href="inspectors.php">Inspectors</a></li>
 			  			<li><a href="reportsd.php">Reports</a></li>
-			  			<!--<li><a href="gallery.html">Gallery</a></li>
-			  			<li ><a href="help.html">Help</a></li>-->
+
 					</ul> 
 				</div> 					
 			</div>	
