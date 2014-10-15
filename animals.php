@@ -121,7 +121,7 @@ if(empty($_POST['pname']) OR empty($_POST['species']) OR empty($_POST['breed']) 
 }
 elseif(!empty($_FILES['animalImage']['name'])){
 	
-		if(!$_FILES['animalImage']['type'] == "image/jpg"){
+		if($_FILES['animalImage']['type'] != "image/jpg"){
 			
 			$GLOBALS['Error'] = ' Image is not in the correct format, please select a jpg file';						
 		}
@@ -255,7 +255,7 @@ elseif(empty($_FILES['animalImage']['name'])){
 	$GLOBALS['Error'] = ' Please select an image for the animal';
 }
 //validating the image is a jpg
-elseif(!$_FILES['animalImage']['type'] == "image/jpg"){
+elseif($_FILES['animalImage']['type'] != "image/jpg"){
 	$GLOBALS['Error'] = ' Image is not in the correct format, please select a jpg file';
 }
 else{
@@ -349,14 +349,13 @@ else{
 			<div class="row">
 				<div class="col-xs-12 col-md-12"> 
 					<ul class="nav nav-tabs" data-tabs="tabs" >
-			  			<li><a href="home.html">Home</a></li>		  			
+			  			<li><a href="home.php">Home</a></li>		  			
 				  		<li class="active" data-toggle="tab"><a href="animals.php">Animals</a></li>
 				  		<li><a href="qrcode.php">QR Codes</a></li>
 				  		<li><a href="users.php">Users</a></li>
 				  		<li><a href="inspectors.php">Inspectors</a></li>
 				  		<li><a href="reportsd.php">Reports</a></li>
-				  		<!--<li><a href="gallery.html">Gallery</a></li>
-				  		<li><a href="help.html">Help</a></li>-->				  		
+				  		
 					</ul> 
 				</div> 					
 			</div>
