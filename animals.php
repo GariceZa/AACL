@@ -26,7 +26,12 @@ else if(isset($_POST['updateAnimal'])){
 	UpdateAnimal($db);
 }
 else if(isset($_POST['adoptAnimal'])){
-	header('Location:adopt.php');
+		if(!isset($_SESSION['animal_ID'])){
+		$GLOBALS['Error'] = ' No animal selected';
+	}
+	else{
+		header('Location:adopt.php');
+	}
 }
 //updates the animal details without a new image 
 function UpdateAnimalWithoutImage($db,$animal_ID,$aName,$aSpecies,$aBreed,$aGender,$rDate,$aInjuries,$aTreatments){
@@ -121,7 +126,7 @@ if(empty($_POST['pname']) OR empty($_POST['species']) OR empty($_POST['breed']) 
 }
 elseif(!empty($_FILES['animalImage']['name'])){
 	
-		if($_FILES['animalImage']['type'] != "image/jpg"){
+		if(pathinfo($_FILES['animalImage']['name'],PATHINFO_EXTENSION) != "jpg"){
 			
 			$GLOBALS['Error'] = ' Image is not in the correct format, please select a jpg file';						
 		}
@@ -255,25 +260,25 @@ elseif(empty($_FILES['animalImage']['name'])){
 	$GLOBALS['Error'] = ' Please select an image for the animal';
 }
 //validating the image is a jpg
-elseif($_FILES['animalImage']['type'] != "image/jpg"){
+elseif(pathinfo($_FILES['animalImage']['name'],PATHINFO_EXTENSION) != "jpg"){
 	$GLOBALS['Error'] = ' Image is not in the correct format, please select a jpg file';
 }
 else{
 
 	//storing post data 
-	 $aName 		= $_POST['pname'];
-	 $aSpecies 		= $_POST['species'];
-	 $aBreed 		= $_POST['breed'];
-	 $aGender 		= $_POST['gender'];
-	 $aImage 		= addslashes(file_get_contents($_FILES['animalImage']['tmp_name']));//saving image as binary data
-	 $rDate 		= $_POST['rdate'];
-	 $aInjuries 	= $_POST['inj'];
-	 $aTreatments 	= $_POST['treat'];
+	 $aName 	= $_POST['pname'];
+	 $aSpecies 	= $_POST['species'];
+	 $aBreed 	= $_POST['breed'];
+	 $aGender 	= $_POST['gender'];
+	 $aImage 	= addslashes(file_get_contents($_FILES['animalImage']['tmp_name']));//saving image as binary data
+	 $rDate 	= $_POST['rdate'];
+	 $aInjuries     = $_POST['inj'];
+	 $aTreatments   = $_POST['treat'];
 	 
 
 	
 	//sql to insert values into animals table
-	$insertSQL = "INSERT INTO tbl_Animals VALUES(NULL,'$aName','$aSpecies','$aBreed','$aGender','$aImage','$rDate','$aInjuries','$aTreatments',NULL)";
+	$insertSQL = "INSERT INTO tbl_Animals VALUES(NULL,'$aName','$aSpecies','$aBreed','$aGender','$aImage','$rDate','$aInjuries','$aTreatments')";
 	
 	//runs the insert and displays an error if the insert is unsuccessful
 	if(!$result = $db->query($insertSQL)){
@@ -305,7 +310,7 @@ else{
 	
 	//close the db connection;
 	$db->close();
-}	
+}
 }
 ?>
 <!DOCTYPE public>
@@ -316,6 +321,10 @@ else{
 	<!--Getting web styling from css file -->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/mycss.css">
+	<link rel="stylesheet" href="css/mycss.css">
+			<link rel="icon" 
+      	  type="image/ico" 
+      	  href="images/favicon.ico">
 </head>
 <body>
 
@@ -355,7 +364,8 @@ else{
 				  		<li><a href="users.php">Users</a></li>
 				  		<li><a href="inspectors.php">Inspectors</a></li>
 				  		<li><a href="reportsd.php">Reports</a></li>
-				  		
+				  		<!--<li><a href="gallery.html">Gallery</a></li>
+				  		<li><a href="help.html">Help</a></li>-->				  		
 					</ul> 
 				</div> 					
 			</div>
@@ -386,7 +396,7 @@ else{
 					<div class="col-xs-7 col-md-2">
 						<p class="labels" title="Species">Pet Type:</p>
 					</div>
-					<div class="col-xs-3 col-md-2">
+					<div class="col-xs-4 col-md-2">
 						<select class = "form-control" id = "species" onchange = "changeSpecies(this)" title="Species">
 							<?php
 								if($GLOBALS['animal_Type'] == 'Dog'){
@@ -422,7 +432,7 @@ else{
 						else{
 							echo 'Dog';
 						}?>">
-					</div>							
+					</div>										
 				</div>
 <!----------------------------------------------------------//ROW//---------------------------------------------------------------------------------->			
 				<div class="row">			
@@ -443,7 +453,7 @@ else{
 					<div class="col-xs-7 col-md-2">
 						</br><p class="labels" title="Sex">Gender:</p>
 					</div>
-					<div class="col-xs-3 col-md-2">
+					<div class="col-xs-4 col-md-2">
 					</br><select class = "form-control" id = "gender" onchange = "changeGender(this)" title="Sex">
 							<?php
 								if($GLOBALS['animal_Gender'] == 'Male'){
@@ -468,7 +478,7 @@ else{
 								}
 							?>
 						</select>
-						
+				
 						<input type = 'hidden' name = "gender" id = "animalGender"
 						value = "<?php
 						if(isset($GLOBALS['animal_Gender'])){
@@ -485,7 +495,7 @@ else{
 <!----------------------------------------------------------//ROW//---------------------------------------------------------------------------------->			
 				<div class="row">
 					<div class="col-xs-7 col-md-2">
-						</br><p class="labels" title="Focus on the month and year of rescue">Rescue Date:</p>
+						</br><p class="labels" title="Month and year of rescue">Rescue Date:</p>
 					</div>				
 					<div class="col-xs-3 col-md-2">
 						</br><input type="date" name="rdate" id="rdate" value ="<?php
@@ -584,17 +594,16 @@ else{
 				<div class="row">
 				<div class="col-xs-4 col-md-2">
 					<!-- Button trigger modal -->
-					</br><button class="btn btn-primary center" data-toggle="modal" data-target="#myModal" title="Search for an inspector">
+					</br><button class="btn btn-primary center" datea-keyboard="true" data-toggle="modal" data-target="#myModal" title="Search for an inspector">
 					  Search
 					</button>
-
 					<!-- Modal -->
 					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					  <div class="modal-dialog">
 					    <div class="modal-content">
 					      <div class="modal-header">
 					        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					        <h4 class="modal-title" id="myModalLabel">Search Animal Name</h4>
+					        <h4 class="modal-title" id="myModalLabel">Enter Animal Name</h4>
 					      </div>
 					      <div class="modal-body">
 
