@@ -74,6 +74,10 @@ function SearchForInspector($db){
 		if(!$result = $db->query($sql)){
 			$GLOBALS['Error'] = 'There was an error running the query['.$db->error.']';
 		}
+		//if there are no results returned
+		elseif($result->num_rows == 0){
+			$GLOBALS['Error'] = ' Inspector does not exist';
+		}
 		else{
 			//store returned values in the global variables
 			while ($row = $result->fetch_assoc()){
@@ -252,20 +256,7 @@ function AddNewInspector($db){
 									echo'<option>'.'Junior'.'</option>';
 									echo'<option>'.'Senior'.'</option>';
 								}
-							?>
-							  <!--<?php //setting the selection option 
-								//for($cnt = 1;$cnt <=5;$cnt++){
-								//	if($GLOBALS['inspectors_Rank'] == $cnt){
-								//		echo'<option selected>'.$cnt.'</option>';
-								//	}
-								//	elseif($_POST['iRank'] == $cnt){
-								//		echo'<option selected>'.$cnt.'</option>';;
-								//	}
-								//	else{
-								//	echo'<option>'.$cnt.'</option>';
-								//	}
-								//}
-							  //?>-->
+							?>							  
 							</select>
 							<input type = 'hidden' name = "iRank" id ="rankLevel" 
 							value = "<?php
@@ -302,7 +293,7 @@ function AddNewInspector($db){
 					    <div class="modal-content">
 					      <div class="modal-header">
 					        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					        <h4 class="modal-title" id="myModalLabel">Inspector Search</h4>
+					        <h4 class="modal-title" id="myModalLabel">Enter league ID</h4>
 					      </div>
 					      <div class="modal-body">
 

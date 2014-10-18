@@ -155,6 +155,10 @@ else{
 	if(!$result = $db->query($sql)){
 		$GLOBALS['Error'] = 'There was an error running the query['.$db->error.']';
 	}
+	//if there are no results returned
+	elseif($result->num_rows == 0){
+			$GLOBALS['Error'] = ' Animal does not exist';
+	}
 	else{
 		while ($row = $result->fetch_assoc()){
 		

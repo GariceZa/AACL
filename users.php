@@ -93,16 +93,20 @@ function UpdateUser($db){
 //returns found users details
 function SearchForUser($db){
 	//validating the username field is filled in
-	if(empty($_POST['userName'])){
-		$GLOBALS['Error'] = 'Please fill in the required username field when searching for a user';
+	if(empty($_POST['userEmail'])){
+		$GLOBALS['Error'] = 'Please fill in the required email address when searching for a user';
 	}
 	else{
 		// selecting user details from the db 
-		$sql = "SELECT * FROM tbl_Users WHERE user_Name = '".$_POST['userName']."'";
+		$sql = "SELECT * FROM tbl_Users WHERE user_Email = '".$_POST['userEmail']."'";
 	
 		//runs the query and displays an error if the statement is unsuccessful
 		if(!$result = $db->query($sql)){
 			$GLOBALS['Error'] = 'There was an error running the query['.$db->error.']';
+		}
+		//if there are no results returned
+		elseif($result->num_rows == 0){
+			$GLOBALS['Error'] = ' User does not exist';
 		}
 		else{
 			//store returned values in the global variables
@@ -308,14 +312,14 @@ function AddNewUser($db){
 					    <div class="modal-content">
 					      <div class="modal-header">
 					        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					        <h4 class="modal-title" id="myModalLabel">User Search</h4>
+					        <h4 class="modal-title" id="myModalLabel">Enter users email</h4>
 					      </div>
 					      <div class="modal-body">
 						  
 							<!-- form used to submit the search data -->
 							<form action = "users.php" method = "post">						  
 								<div class="input-group">
-									<input value="" autofocus type="text" name = "userName" class="form-control" >
+									<input value="" autofocus type="text" name = "userEmail" class="form-control" >
 									<span class="input-group-btn">
 									<button class="btn btn-default" type="submit" name = "userFind" title="Start search">Find</button>
 							</form>
